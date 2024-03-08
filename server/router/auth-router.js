@@ -9,6 +9,6 @@ router.route("/").get(home);
 router.route('/register').post(Registration); //for Registration Page
 
 //Rout API for login page
-router.get('/login', Login);
+router.post('/login', Login);
 
 module.exports = router;
