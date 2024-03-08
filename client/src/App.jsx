@@ -5,10 +5,12 @@ import { Contact } from "./pages/Contact";
 import { Services } from "./pages/Services";
 import { Register } from "./pages/Register";
 import { Login } from './pages/Login';
+import { Navbar } from './conponets/Navbar';
 
 const App = () => {
   return (
     <BrowserRouter>
+      <Navbar />
       <Routes>
         <Route path='/home' element={<Home />} />
         <Route path='/about' element={<About />} />
