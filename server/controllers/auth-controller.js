@@ -26,13 +26,7 @@ const Registration = async (req, res) => {
             });
         }
 
-        //hash Password
-        // const salt = 10;
-        // const hash_password = await bcrypt.hash(password, salt);
-        //const hash_password = await bcrypt.hash(password, 10);
-
         //create user 
-
         const newUser = await User.create({
             username,
             email,
