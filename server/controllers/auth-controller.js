@@ -69,7 +69,8 @@ const Login = async (req, res) => {
             });
         }
         //if user exist, then compare password for login
-        const validPassword = await bcrypt.compare(password, userExist.password);
+        const validPassword = await userExist.comparePassword(password);
+        
         if (validPassword) {
             res.status(200).json({
                 success: true,
