@@ -12,23 +12,6 @@ const home = async (req, res) => {
 };
 
 /*  For Registration Page */
-// const Registration = async (req, res) => {
-//     try {
-//         console.log(req.body); // To check the data received from frontend
-//         res.status(200).json({
-//             success: true,
-//             msg: "Registration Successful!",
-//             data: req.body,
-//         });
-//     } catch (error) {
-//         console.log("Got Error: ", error);
-//         res.status(500).json({
-//             success: false,
-//             message: "Page not found"
-//         });
-//     }
-// };
-
 const Registration = async (req, res) => {
     try {
         //fetch data from req body
