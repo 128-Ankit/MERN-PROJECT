@@ -1,0 +1,18 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+header{
+    border: 2px solid red;
+}
+.cantaner{
+    color: red;
+    max-width: 140rem;
+    padding: 4.2rem 2.4rem;
+    display: flex;
+    justify-content: space-between;
+}
+ul {
+    display: flex;
+    gap: 3.2rem;
+}

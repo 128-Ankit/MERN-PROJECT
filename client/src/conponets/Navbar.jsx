@@ -1,8 +1,7 @@
 import { NavLink } from "react-router-dom"
-
+import './Navbar.css';
 export const Navbar = () => {
     return <>
-        <h1>wellcome to navbar page</h1>
         <header>
             <div className="cantaner">
                 <div className="logo-brand">
