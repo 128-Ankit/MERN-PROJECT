@@ -49,6 +49,7 @@ const Registration = async (req, res) => {
         //const hash_password = await bcrypt.hash(password, 10);
 
         //create user 
+
         const newUser = await User.create({
             username,
             email,
@@ -62,6 +63,8 @@ const Registration = async (req, res) => {
             success: true,
             msg: "User Created Successfully",
             data: newUser,
+            token : await newUser.generateToken(),
+            userId: newUser._id.toString(),
         });
 
     } catch (error) {
