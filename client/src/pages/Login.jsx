@@ -20,9 +20,28 @@ export const Login = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    //handle form on login
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(user);
+        //connecting login with backend
+        try {
+            const response = await fetch(`http://localhost:4000/api/auth/login`,
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(user),
+                });
+            if (response.ok) {
+                alert("Logged in Successfully");
+                navigate("/");
+            }
+            else {
+                alert("Invalid email or password");
+            }
+        } catch (error) {
+            console.log("Login error", error);
+        }
     }
 
     return (
@@ -68,7 +87,7 @@ export const Login = () => {
                                     </div>
                                     <br />
                                     <button type="submit" className="btn btn-submit">
-                                        Register Now
+                                        Login Now
                                     </button>
                                 </form>
                             </div>

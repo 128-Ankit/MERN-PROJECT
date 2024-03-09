@@ -64,6 +64,7 @@ const Login = async (req, res) => {
         const userExist = await User.findOne({ email });
         console.log(userExist);
         if (!userExist) {
+            console.log("User not registered");
             return res.status(400).json({
                 success: false,
                 msg: "User not registered"
@@ -73,6 +74,7 @@ const Login = async (req, res) => {
         const validPassword = await userExist.comparePassword(password);
         
         if (validPassword) {
+            console.log("Login Successfully");
             res.status(200).json({
                 success: true,
                 msg: "Login Successfully",
@@ -80,6 +82,7 @@ const Login = async (req, res) => {
                 userId: userExist._id.toString(),
             });
         } else {
+            console.log("Invalid Password!");
             return res.status(401).json({
                 success: false,
                 msg: "Invalid Password!"
