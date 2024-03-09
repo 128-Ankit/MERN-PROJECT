@@ -6,7 +6,7 @@ import { Services } from "./pages/Services";
 import { Register } from "./pages/Register";
 import { Login } from './pages/Login';
 import { Navbar } from './conponets/Navbar';
-
+import { Footer } from "./conponets/footer/Footer";
 const App = () => {
   return (
     <BrowserRouter>
@@ -19,6 +19,7 @@ const App = () => {
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

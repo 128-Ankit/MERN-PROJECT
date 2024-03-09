@@ -1,3 +1,5 @@
+import { Analytics } from '../conponets/Analytics ';
+
 export const Home = () => {
     return <>
         <main>
@@ -35,8 +37,8 @@ export const Home = () => {
             </section>
         </main>
 
-        {/* 2nd section 
-        <Analytics /> */}
+        {/* 2nd section  */}
+        <Analytics />
 
         {/* 3rd section  */}
         <section className="section-hero">

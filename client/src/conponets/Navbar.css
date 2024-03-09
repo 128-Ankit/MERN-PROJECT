@@ -3,7 +3,13 @@
     padding: 0;
 }
 header{
-    border: 2px solid red;
+    background: #0000000e;
+    /* position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1; */
 }
 .cantaner{
     color: red;
