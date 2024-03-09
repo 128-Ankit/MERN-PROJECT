@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom'
 
 export const Register = () => {
     const [user, setUser] = useState({
@@ -7,6 +8,8 @@ export const Register = () => {
         phoneNumber: "",
         password: "",
     });
+
+    const navigate = useNavigate()
 
     const handleInput = (e) => {
         console.log(e);
@@ -20,13 +23,31 @@ export const Register = () => {
     };
 
     // handle form on submit
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(user);
-        alert("Registration  Successful!");
+        //connecting with  backend to register user
+        try {
+            const response = await fetch(`http://localhost:4000/api/auth/register`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(user),
+            });
+            if (response.ok) {
+                setUser({
+                    username: "",
+                    email: "",
+                    phoneNumber: "",
+                    password: "",
+                });
+                navigate('/login')
+            }
+            console.log(response);
+        } catch (error) {
+            console.log("Register error", error);
+        }
     };
 
-    //  Help me reach 1 Million subs 👉 https://youtube.com/thapatechnical
 
     return (
         <>
