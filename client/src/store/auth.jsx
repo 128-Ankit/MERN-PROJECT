@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 export const AuthContext = createContext();
 
@@ -6,6 +6,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
 
     const [token, setToken] = useState(localStorage.getItem("token"));
+    const [user, setUser] = useState("");
 
     // Function to check if the user is logged in or not
     const isLoggedIn = !!token;
@@ -19,11 +20,44 @@ export const AuthProvider = ({ children }) => {
     //adding logout functionality
     const LogoutUser = () => {
         setToken("");
-        return  localStorage.removeItem('token');
+        return localStorage.removeItem('token');
     };
 
+    // JWT AUTHENTICATION - to get the currently loggedIN user data
+
+    const userAuthentication = async () => {
+        try {
+            // setIsLoading(true);
+            const response = await fetch("http://localhost:4000/api/auth/user", {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log("user data ", data.userData
+                );
+                setUser(data.userData
+                    );
+                // setIsLoading(false);
+            } else {
+                console.error("Error fetching user data");
+                setIsLoading(false);
+            }
+        } catch (error) {
+            console.error("Error fetching user data");
+        }
+    };
+
+    useEffect(() => {
+        userAuthentication();
+    }, []);
+
+
     return (
-        <AuthContext.Provider value={{ isLoggedIn, storeTokenInLS, LogoutUser }}>
+        <AuthContext.Provider value={{ isLoggedIn, storeTokenInLS, LogoutUser, user }}>
             {children}
         </AuthContext.Provider>
     );
