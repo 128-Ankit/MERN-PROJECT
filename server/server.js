@@ -4,6 +4,7 @@ const app = express();
 const userRouter = require('./router/auth-router');
 const contactRouter = require('./router/contact-router'); 
 const serviceRouter = require("./router/service-router");
+const adminRouter = require("./router/admin-router");
 const cors = require( "cors" );
 //importing Database
 const database = require("./utils/database");
@@ -27,6 +28,10 @@ database.connect();
 app.use("/api/auth", userRouter);
 app.use("/api/form", contactRouter);
 app.use("/api/data", serviceRouter);
+
+//defining admin route
+app.use("/api/admin", adminRouter);
+
 
 
 //Runing the server live
