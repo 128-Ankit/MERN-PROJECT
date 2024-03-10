@@ -19,7 +19,7 @@ const signupSchema = z.object({
     phoneNumber: z
         .string({ required_error: "Phone Number is required" })
         .trim()
-        .min(10, "Phone Number should have at least 8 characters")
+        .min(10, "Phone Number should have at least 10 characters")
         .max(20, "Phone Number cannot exceed 15 characters"),
 });
 
