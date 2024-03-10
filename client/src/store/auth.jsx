@@ -7,6 +7,7 @@ export const AuthProvider = ({ children }) => {
 
     const [token, setToken] = useState(localStorage.getItem("token"));
     const [user, setUser] = useState("");
+    const [services, setServices] = useState("");
 
     // Function to check if the user is logged in or not
     const isLoggedIn = !!token;
@@ -40,7 +41,7 @@ export const AuthProvider = ({ children }) => {
                 console.log("user data ", data.userData
                 );
                 setUser(data.userData
-                    );
+                );
                 // setIsLoading(false);
             } else {
                 console.error("Error fetching user data");
@@ -51,13 +52,32 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    // to fetch the services data from the database
+    const getServices = async () => {
+        try {
+            const response = await fetch("http://localhost:4000/api/data/services", {
+                method: "GET",
+            });
+            console.log("geting response is :", response);
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data.response);
+                setServices(data.response);
+
+            }
+        } catch (error) {
+            console.log(`services frontend error: ${error}`);
+        }
+    };
+
     useEffect(() => {
+        getServices();
         userAuthentication();
     }, []);
 
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, storeTokenInLS, LogoutUser, user }}>
+        <AuthContext.Provider value={{ isLoggedIn, storeTokenInLS, LogoutUser, user, services }}>
             {children}
         </AuthContext.Provider>
     );

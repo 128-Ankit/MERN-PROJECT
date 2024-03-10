@@ -3,6 +3,7 @@ const app = express();
 //Importing router
 const userRouter = require('./router/auth-router');
 const contactRouter = require('./router/contact-router'); 
+const serviceRouter = require("./router/service-router");
 const cors = require( "cors" );
 //importing Database
 const database = require("./utils/database");
@@ -25,6 +26,7 @@ database.connect();
 //Routes
 app.use("/api/auth", userRouter);
 app.use("/api/form", contactRouter);
+app.use("/api/data", serviceRouter);
 
 
 //Runing the server live
