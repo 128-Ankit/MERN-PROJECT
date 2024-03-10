@@ -72,7 +72,7 @@ const Login = async (req, res) => {
         }
         //if user exist, then compare password for login
         const validPassword = await userExist.comparePassword(password);
-        
+
         if (validPassword) {
             console.log("Login Successfully");
             res.status(200).json({
@@ -98,4 +98,18 @@ const Login = async (req, res) => {
     }
 };
 
-module.exports = { home, Registration, Login };
+// to send user data
+const user = async (req, res) => {
+
+    try {
+        const userData = req.user;
+        console.log(userData);
+        return res.status(200).json({ msg: userData });
+        
+    } catch (error) {
+        console.log("Error in getting User Data : ", error);
+        return res.status(500).json({ mgs: "got an error" })
+    }
+}
+
+module.exports = { home, Registration, Login, user };
