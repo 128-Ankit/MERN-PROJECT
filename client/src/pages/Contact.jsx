@@ -1,32 +1,34 @@
 import { useState } from "react";
 import { useAuth } from "../store/auth";
 
+const defaultContactFormData = {
+    username: "",
+    email: "",
+    message: "",
+};
+
 export const Contact = () => {
-    const [contact, setContact] = useState({
-        username: "",
-        email: "",
-        message: "",
-    });
+    const [contact, setContact] = useState(defaultContactFormData);
 
-    //add user data from db
+    //adding data in contaact form from db
     const [userData, setUserData] = useState(true);
-    const {user} = useAuth();
-
+    const { user } = useAuth();
     if (userData && user) {
-        setContact({
-          username: user.username,
-          email: user.email,
-          message: "",
-        });
-    
-        setUserData(false);
-      }
 
+        setContact({
+            username: user.username,
+            email: user.email,
+            message: "",
+        });
+        setUserData(false);
+    }
 
     // lets tackle our handleInput
     const handleInput = (e) => {
         const name = e.target.name;
         const value = e.target.value;
+        // console.log("name is :", name)
+        // console.log("value is :", value)
 
         setContact({
             ...contact,
@@ -34,14 +36,38 @@ export const Contact = () => {
         });
     };
 
-    // handle fomr getFormSubmissionInfo
-    const handleSubmit = (e) => {
+    //handle fomr getFormSubmissionInfo
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        // Check that the required fields are present
+        if (!contact.name || !contact.email || !contact.message) {
+            // One or more required fields are missing, show an error message
+            console.error("All fields are required.");
+            return;
+        }
 
-        console.log(contact);
+        try {
+            const response = await fetch("http://localhost:4000/api/form/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(contact),
+            });
+            console.log("response: ", response);
+
+            if (response.ok) {
+                alert("Message sent successfully");
+                setContact(defaultContactFormData);
+                const data = await response.json();
+                console.log("data is getting this: ", data);
+            } else {
+                //console.log("data is getting this in errror: ",data);
+                alert("Failed to send message. Please try again.");
+            }
+        } catch (error) {
+            alert("An error occurred while sending the message. Please try again.");
+            console.log(error);
+        }
     };
-
-
     return (
         <>
             <section className="section-contact">
@@ -88,7 +114,7 @@ export const Contact = () => {
                                 <textarea
                                     name="message"
                                     id="message"
-                                    autoComplete="off"
+                                    autoComplete="on"
                                     value={contact.message}
                                     onChange={handleInput}
                                     required

@@ -14,7 +14,7 @@ const contactForm = async (req, res) => {
         console.log("error to submit contact form", error);
         return res.status(400).json({
             success: false,
-            msg: "Contact form  submission failed!"
+            msg: "Contact form submission failed!"
         });
     }
 }
