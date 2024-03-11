@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(localStorage.getItem("token"));
     const [user, setUser] = useState("");
     const [services, setServices] = useState("");
-
+    const authorizationToken = `Bearer ${token}`;
     // Function to check if the user is logged in or not
     const isLoggedIn = !!token;
     console.log("isLoggedIN ", isLoggedIn);
@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
             const response = await fetch("http://localhost:4000/api/auth/user", {
                 method: "GET",
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: authorizationToken,
                 },
             });
 
@@ -78,7 +78,7 @@ export const AuthProvider = ({ children }) => {
 
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, storeTokenInLS, LogoutUser, user, services }}>
+        <AuthContext.Provider value={{ isLoggedIn, storeTokenInLS, LogoutUser, user, services, authorizationToken }}>
             {children}
         </AuthContext.Provider>
     );
@@ -87,7 +87,7 @@ export const AuthProvider = ({ children }) => {
 export const useAuth = () => {
     const authContextValue = useContext(AuthContext);
     if (!authContextValue) {
-        throw new Error("useAuth used outside of the Provider");
+      throw new Error("useAuth used outside of the Provider");
     }
     return authContextValue;
-};
+  };

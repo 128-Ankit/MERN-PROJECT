@@ -23,7 +23,7 @@ const getAllUsers = async (req, res) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(404).json({
+        return res.status(404).json({
             success: false,
             msg: 'Server error'
         });
