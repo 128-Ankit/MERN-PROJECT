@@ -8,7 +8,7 @@ export const Register = () => {
     const [user, setUser] = useState({
         username: "",
         email: "",
-        phoneNumber: "",
+        phone: "",
         password: "",
     });
 
@@ -45,7 +45,7 @@ export const Register = () => {
                 setUser({
                     username: "",
                     email: "",
-                    phoneNumber: "",
+                    phone: "",
                     password: "",
                 });
                 navigate('/login')
@@ -99,11 +99,11 @@ export const Register = () => {
                                         />
                                     </div>
                                     <div>
-                                        <label htmlFor="phoneNumber">phoneNumber</label>
+                                        <label htmlFor="phone">phone</label>
                                         <input
                                             type="number"
-                                            name="phoneNumber"
-                                            value={user.phoneNumber}
+                                            name="phone"
+                                            value={user.phone}
                                             onChange={handleInput}
                                         />
                                     </div>

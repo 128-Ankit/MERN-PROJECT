@@ -10,8 +10,9 @@ import { Logout } from './pages/Logout';
 import { Footer } from "./conponets/footer/Footer";
 import { Error } from "./pages/Error";
 import { AdminLayout } from './conponets/layouts/Admin-layout';
-import{AdminUsers} from './pages/Admin-Users';
-import{AdminContacts} from './pages/Admin-Contacts';
+import { AdminUsers } from './pages/Admin-Users';
+import { AdminContacts } from './pages/Admin-Contacts';
+import { AdminUpdate } from "./pages/Admin-Update";
 const App = () => {
   return (
     <BrowserRouter>
@@ -28,7 +29,7 @@ const App = () => {
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="users" element={<AdminUsers />} />
           <Route path="contacts" element={<AdminContacts />} />
-          {/* <Route path="users/:id/edit" element={<AdminUpdate />} /> */}
+          <Route path="users/:id/edit" element={<AdminUpdate />} />
         </Route>
       </Routes>
       <Footer />

@@ -15,7 +15,7 @@ const home = async (req, res) => {
 const Registration = async (req, res) => {
     try {
         //fetch data from req body
-        const { username, email, phoneNumber, password } = req.body;
+        const { username, email, phone, password } = req.body;
 
         //check is user already exist or not
         const userExist = await User.findOne({ email: email });
@@ -31,7 +31,7 @@ const Registration = async (req, res) => {
         const newUser = await User.create({
             username,
             email,
-            phoneNumber,
+            phone,
             password,
             // password: hash_password
         });

@@ -30,20 +30,46 @@ const getAllUsers = async (req, res) => {
     }
 }
 
-const deleteUserById = async (req , res) => {
+const getUserById = async (req, res) => {
     try {
         const id = req.params.id;
-        await User.deleteOne({_id: id});
+        const data = await User.findOne({ _id: id }, { passwoed: 0 });
+        res.status(200).json(data)
+    } catch (error) {
+        res.status(500).json({
+            msg: "Error to finding single user data!"
+        });
+    }
+}
+
+const updateUserById = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const updatedUserData = req.body; // getting user data
+        const updatedData = await User.updateOne({ _id: id }, {
+            $set: updatedUserData
+        });
+        return res.status(200).json(updatedData);
+    } catch (error) {
+        next(error);
+    }
+}
+
+const deleteUserById = async (req, res) => {
+    try {
+        const id = req.params.id;
+        await User.deleteOne({ _id: id });
         res.status(200).json({
             msg: 'User Deleted Successfully'
         })
     } catch (error) {
         console.log("Error in deleting the user : ", error);
         res.status(500).json({
-            msg:"Error  in deleting the user"
+            msg: "Error  in deleting the user"
         });
     }
 }
+
 
 // ------------------------------------------------
 //              Get useer contacts
@@ -53,16 +79,16 @@ const getAllContacts = async (req, res) => {
         //fetch data from db
         const constacts = await Contact.find();
         //checking for data existence
-        if(!constacts || constacts.length == 0){
+        if (!constacts || constacts.length == 0) {
             return res.status(400).json({
-                success:false,
+                success: false,
                 msg: "There are no contacts in the database."
             });
         }
         //return response
-        return  res.status(200).json({
-            success :true ,
-            count   :constacts,
+        return res.status(200).json({
+            success: true,
+            count: constacts,
             msg: 'Contacts got successfully'
         });
     } catch (error) {
@@ -74,4 +100,4 @@ const getAllContacts = async (req, res) => {
     }
 }
 
-module.exports = { getAllUsers, getAllContacts, deleteUserById }
+module.exports = { getAllUsers, getAllContacts, deleteUserById, getUserById, updateUserById }
