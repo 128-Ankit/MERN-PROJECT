@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../store/auth";
+import { toast } from 'react-toastify';
 
 export const AdminUsers = () => {
     const [users, setUsers] = useState([]);
@@ -15,7 +16,7 @@ export const AdminUsers = () => {
             });
             const data = await response.json();
             console.log("users", data);
-           
+
             if (data.success) {
                 setUsers(data.data);
             }
@@ -27,6 +28,33 @@ export const AdminUsers = () => {
             console.log(error);
         }
     };
+
+    //deleting user from the database
+    const deleteUser = async (id) => {
+        try {
+            console.log("id is: ", id);
+            const response = await fetch(`http://localhost:4000/api/admin/users/delete/${id}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: authorizationToken,
+                },
+            });
+            console.log("response: ", response);
+            const data = await response.json();
+            console.log(`user after delete: ${data}`)
+
+            if(response.ok){
+                toast.success("User deleted  successfully");
+                getAllUserData();
+            } else {
+                console.log("Error deleting User :" + data.message);
+                toast.error("user not deleted");
+            }
+
+        } catch (error) {
+            console.log("Error in delation",error);
+        }
+    }
 
     useEffect(() => {
         getAllUserData();
@@ -56,7 +84,8 @@ export const AdminUsers = () => {
                                     <td>{curUser.email}</td>
                                     <td>{curUser.phone}</td>
                                     <td>Edit</td>
-                                    <td>Delete</td>
+                                    <td><button onClick={() => deleteUser(curUser._id)}>
+                                        {""} Delete{""}</button></td>
                                 </tr>
                             ))}
                         </tbody>

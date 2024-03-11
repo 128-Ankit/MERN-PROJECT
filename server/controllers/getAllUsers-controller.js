@@ -30,6 +30,21 @@ const getAllUsers = async (req, res) => {
     }
 }
 
+const deleteUserById = async (req , res) => {
+    try {
+        const id = req.params.id;
+        await User.deleteOne({_id: id});
+        res.status(200).json({
+            msg: 'User Deleted Successfully'
+        })
+    } catch (error) {
+        console.log("Error in deleting the user : ", error);
+        res.status(500).json({
+            msg:"Error  in deleting the user"
+        });
+    }
+}
+
 // ------------------------------------------------
 //              Get useer contacts
 // ------------------------------------------------
@@ -59,4 +74,4 @@ const getAllContacts = async (req, res) => {
     }
 }
 
-module.exports = { getAllUsers, getAllContacts }
+module.exports = { getAllUsers, getAllContacts, deleteUserById }
