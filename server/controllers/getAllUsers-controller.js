@@ -8,7 +8,7 @@ const getAllUsers = async (req, res) => {
     try {
         //get data from db
         const users = await User.find({}, { password: 0 });
-        console.log(users);
+        // console.log(users);
         //validation
         if (!users || users.length === 0) {
             return res.status(401).json({

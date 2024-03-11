@@ -59,7 +59,7 @@ userSchema.methods.generateToken = async function () {
             isAdmin: this.isAdmin
         },
             process.env.JWT_SECRETE_KEY,
-            { expiresIn: "1h", }
+            { expiresIn: "48h", }
         )
     } catch (error) {
 

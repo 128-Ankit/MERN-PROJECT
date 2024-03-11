@@ -1,46 +1,50 @@
 import { useState } from "react";
 import { useAuth } from "../store/auth";
 
-const defaultContactFormData = {
-    username: "",
-    email: "",
-    message: "",
-};
+// const defaultContactFormData = {
+//     username: "",
+//     email: "",
+//     message: "",
+// };
 
 export const Contact = () => {
-    const [contact, setContact] = useState(defaultContactFormData);
+    const [contact, setContact] = useState();
+    const [email, setEmail] = useState();
+    const [message, setMessage] = useState();
 
-    //adding data in contaact form from db
-    const [userData, setUserData] = useState(true);
-    const { user } = useAuth();
-    if (userData && user) {
 
-        setContact({
-            username: user.username,
-            email: user.email,
-            message: "",
-        });
-        setUserData(false);
-    }
+    // adding data in contaact form from db
+    // const [userData, setUserData] = useState(true);
+    // const { user } = useAuth();
+    // if (userData && user) {
+
+    //     setContact({
+    //         username: user,
+    //         email: user.email,
+    //         message: "",
+    //     });
+    //     setUserData(false);
+    // }
 
     // lets tackle our handleInput
-    const handleInput = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-        // console.log("name is :", name)
-        // console.log("value is :", value)
+    // const handleInput = (e) => {
+    //     const name = e.target.name;
+    //     const value = e.target.value;
+    //     // console.log("name is :", name)
+    //     // console.log("value is :", value)
 
-        setContact({
-            ...contact,
-            [name]: value,
-        });
-    };
+    //     setContact({
+    //         ...contact,
+    //         [name]: value,
+    //     });
+    // };
 
     //handle fomr getFormSubmissionInfo
     const handleSubmit = async (e) => {
         e.preventDefault();
         // Check that the required fields are present
-        if (!contact.name || !contact.email || !contact.message) {
+
+        if (!contact || !email || !message) {
             // One or more required fields are missing, show an error message
             console.error("All fields are required.");
             return;
@@ -90,8 +94,8 @@ export const Contact = () => {
                                     name="username"
                                     id="username"
                                     autoComplete="off"
-                                    value={contact.username}
-                                    onChange={handleInput}
+                                    value={contact}
+                                    onChange={(e) => setContact(e.target.value)}
                                     required
                                 />
                             </div>
@@ -103,8 +107,8 @@ export const Contact = () => {
                                     name="email"
                                     id="email"
                                     autoComplete="off"
-                                    value={contact.email}
-                                    onChange={handleInput}
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                     required
                                 />
                             </div>
@@ -115,8 +119,8 @@ export const Contact = () => {
                                     name="message"
                                     id="message"
                                     autoComplete="on"
-                                    value={contact.message}
-                                    onChange={handleInput}
+                                    value={message}
+                                    onChange={(e) => setMessage(e.target.value)}
                                     required
                                     cols="30"
                                     rows="6"

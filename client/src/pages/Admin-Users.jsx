@@ -15,10 +15,13 @@ export const AdminUsers = () => {
             });
             const data = await response.json();
             console.log("users", data);
-            if (Array.isArray(data)) { // Check if data is an array
-                setUsers(data);
-            } else {
-                console.error("Data fetched is not an array:", data);
+           
+            if (data.success) {
+                setUsers(data.data);
+            }
+            else {
+                console.error(data.message);
+                // alert("Unable to fetch data: " + data.message);
             }
         } catch (error) {
             console.log(error);
