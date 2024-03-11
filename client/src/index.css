@@ -526,7 +526,14 @@ table {
     padding: 2rem;
 }
 
+.contact-user-data{
+    background: rgba(255, 255, 0, 0.322);
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .admin-contacts-section tr {
+    background: blue;
     display: grid;
     grid-template-columns: repeat(4, minmax(10rem, 1fr));
     align-items: center;

@@ -57,11 +57,10 @@ export const Contact = () => {
                 body: JSON.stringify(contact),
             });
             console.log("response: ", response);
-
+            const data = await response.json();
             if (response.ok) {
                 alert("Message sent successfully");
                 setContact(defaultContactFormData);
-                const data = await response.json();
                 console.log("data is getting this: ", data);
             } else {
                 //console.log("data is getting this in errror: ",data);
