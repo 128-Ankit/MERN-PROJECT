@@ -1,11 +1,12 @@
 const { Schema, model } = require("mongoose");
 
+// Define the schema
 const contactSchema = new Schema({
     name: { type: String, required: true },
     email: { type: String, required: true },
     message: { type: String, required: true }
 });
 
-//creating model or a collection 
-const contact = new model('Contact', contactSchema);
-module.exports=contact;
+// Create and export the model
+module.exports = model('Contact', contactSchema);
+

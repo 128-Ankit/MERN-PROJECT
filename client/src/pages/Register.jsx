@@ -80,7 +80,7 @@ export const Register = () => {
                                 <form onSubmit={handleSubmit}>
                                     <div>
                                         <label htmlFor="username">username</label>
-                                        <input
+                                        <input className="text-fields"
                                             type="text"
                                             name="username"
                                             value={user.username}

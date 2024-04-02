@@ -51,7 +51,7 @@ const updateUserById = async (req, res) => {
         });
         return res.status(200).json(updatedData);
     } catch (error) {
-        next(error);
+        console.log(error);
     }
 }
 

@@ -35,27 +35,25 @@ export const Contact = () => {
     });
   };
 
-  // handle fomr getFormSubmissionInfo
+  // handle form getFormSubmissionInfo
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const response = await fetch("http://localhost:4000/api/form/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(contact),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(contact), // Send contact data, not user data
       });
+      const res_data = await response.json();
+      console.log("res from server", res_data.msg);
 
       if (response.ok) {
         setContact(defaultContactFormData);
-        const data = await response.json();
-        console.log(data);
-        alert("Message send successfully");
+        alert("Message sent successfully");
       }
     } catch (error) {
-      alert("Message not send");
+      alert("Message not sent");
       console.log(error);
     }
   };
@@ -75,6 +73,8 @@ export const Contact = () => {
           {/* contact form content actual  */}
           <section className="section-form">
             <form onSubmit={handleSubmit}>
+              {" "}
+              {/* Pass handleSubmit without invocation */}
               <div>
                 <label htmlFor="username">username</label>
                 <input
@@ -87,7 +87,6 @@ export const Contact = () => {
                   required
                 />
               </div>
-
               <div>
                 <label htmlFor="email">email</label>
                 <input
@@ -100,7 +99,6 @@ export const Contact = () => {
                   required
                 />
               </div>
-
               <div>
                 <label htmlFor="message">message</label>
                 <textarea
@@ -114,7 +112,6 @@ export const Contact = () => {
                   rows="6"
                 ></textarea>
               </div>
-
               <div>
                 <button type="submit">submit</button>
               </div>

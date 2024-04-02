@@ -16,9 +16,9 @@ export const Home = () => {
                         </p>
                         <div className="btn btn-group">
                             <a href="/contact">
-                                <button className="btn">connect now</button>
+                                <button className="btn primary-buttons">connect now</button>
                             </a>
-                            <a href="/services">
+                            <a href="./services">
                                 <button className="btn secondary-btn">learn more</button>
                             </a>
                         </div>
@@ -59,12 +59,12 @@ export const Home = () => {
                     <p>
                         Ready to take the first step towards a more efficient and secure
                         IT infrastructure? Contact us today for a free consultation and
-                        let's discuss how Thapa Technical can help your business thrive in
+                         discuss how Thapa Technical can help your business thrive in
                         the digital age.
                     </p>
                     <div className="btn btn-group">
                         <a href="/contact">
-                            <button className="btn">connect now</button>
+                            <button className="btn primary-buttons">connect now</button>
                         </a>
                         <a href="/services">
                             <button className="btn secondary-btn">learn more</button>

@@ -4,19 +4,13 @@
 }
 header{
     background: #0000000e;
-    /* position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1; */
 }
 .cantaner{
-    color: red;
     max-width: 140rem;
     padding: 4.2rem 2.4rem;
     display: flex;
     justify-content: space-between;
+    background: #070F2B;
 }
 ul {
     display: flex;

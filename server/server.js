@@ -32,9 +32,6 @@ app.use("/api/data", serviceRouter);
 //defining admin route
 app.use("/api/admin", adminRouter);
 
-
-
-//Runing the server live
 app.listen(PORT, () => {
     console.log(`server started at port at PORT ${PORT}`)
 });
