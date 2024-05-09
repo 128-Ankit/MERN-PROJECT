@@ -2,7 +2,7 @@ const adminMiddleware = async (req, res, next) => {
     try {
         console.log("user is : ", req.user)
         const adminRole = req.user.isAdmin;
-        console.log("adimn role is : ", adminRole);
+        console.log("admin role is : ", adminRole);
         //validation
         if (!adminRole) {
             return res.status(401).json({

@@ -93,7 +93,7 @@ const Login = async (req, res) => {
         console.log("Error in login", error);
         res.status(500).json({
             success: false,
-            msg: 'Server Error! Failed in login try agian'
+            msg: 'Server Error! Failed in login try again'
         });
     }
 };
