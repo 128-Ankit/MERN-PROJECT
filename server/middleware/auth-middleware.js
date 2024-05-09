@@ -3,18 +3,18 @@ require("dotenv").config();
 const User = require("../models/user-model");
 
 const authMiddlewere = async (req, res, next) => {
-    const token = req.header("Authorization");
-
-    if (!token) {
-        // If you attempt to use an expired token, you'll receive a "401 Unauthorized HTTP" response.
-        return res.status(401).json({
-            message: "Unauthorized HTTP, Token not provided"
-        });
-    }
-    const jwtToken = token.replace("Bearer", "").trim();
-    console.log("token from auth middleware", jwtToken);
-
     try {
+        const token = req.header("Authorization");
+
+        if (!token) {
+            // If you attempt to use an expired token, you'll receive a "401 Unauthorized HTTP" response.
+            return res.status(401).json({
+                message: "Unauthorized HTTP, Token not provided"
+            });
+        }
+        const jwtToken = token.replace("Bearer", "").trim();
+        console.log("token from auth middleware", jwtToken);
+
         // Verifying the token
         const isVerified = jwt.verify(jwtToken, process.env.JWT_SECRETE_KEY );
         console.log(isVerified);
@@ -28,8 +28,6 @@ const authMiddlewere = async (req, res, next) => {
         req.token = token;
         req.user = userData;
         req.userID = User._id;
-
-        // Move on to the next middleware or route handler
         next();
     } catch (error) {
         return res.status(401).json({ 
